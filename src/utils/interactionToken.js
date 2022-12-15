@@ -21,7 +21,7 @@ export async function getBalanceHLC(address) {
     return finalBalance
 }
 
-export async function transfer(addressTo, amount, dispatch) {
+export async function transfer(addressTo, amount, dispatch, setTxHash) {
 
     try {
         const web3 = await new Web3(BSCTEST_URL)
@@ -48,12 +48,12 @@ export async function transfer(addressTo, amount, dispatch) {
             method: 'eth_sendTransaction',
             params: [transactionParameters],
         }).then((result) => {
-            console.log(result)
-            dispatch(removeLoading())
+            setTxHash(result)
         }).catch((error) => {
            alert(error);
         });
-                
+
+        dispatch(removeLoading())    
         return txHash;
 
     }
@@ -64,6 +64,8 @@ export async function transfer(addressTo, amount, dispatch) {
         else { 
             alert(error);
         }
+        dispatch(removeLoading())
         window.location.reload();
     }
+    
 }   
