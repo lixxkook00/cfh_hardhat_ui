@@ -11,12 +11,12 @@ export default function Header() {
     const [balance, setBalance] = useState("0")
 
     const handleConnectWallet = async () => {
-        // get address
         const addressConnected = await connectWallet();
         await setAddress(addressConnected);
+    }
 
-        // get balance
-        const balance = await getBalanceHLC(addressConnected)
+    const handleGetBalance = async () => {
+        const balance = await getBalanceHLC()
         await setBalance(balance)
     }
 
@@ -41,6 +41,11 @@ export default function Header() {
             });
         }
     });
+
+    // handle get balance
+    useEffect(() => {
+        handleGetBalance()
+    },[address])
 
     return (
         <div className="header">

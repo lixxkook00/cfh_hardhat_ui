@@ -13,9 +13,9 @@ async function hlcContract() {
     return await new web3.eth.Contract(HLC_ABI,HLC_ADDRESS)
 }
 
-export async function getBalanceHLC(address) {
+export async function getBalanceHLC() {
     const contract = await hlcContract()
-    const balanceBN = await contract.methods.balanceOf(address).call()
+    const balanceBN = await contract.methods.balanceOf(window.ethereum.selectedAddress).call()
     const decimals = await contract.methods.decimals().call()
     const finalBalance = await FormatAmount(balanceBN.toString(),decimals)
     return finalBalance
