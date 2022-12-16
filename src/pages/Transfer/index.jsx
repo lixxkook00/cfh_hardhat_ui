@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { activeLoading } from '../../actions';
+import Transaction from '../../components/Transaction';
 import TransactionModal from '../../modals/TransactionModal';
 import { transfer } from '../../utils/interactionToken';
 
@@ -50,7 +51,7 @@ export default function Transfer() {
                             
                             <div className="form-group">
                                 <label htmlFor="amount">Amount</label>
-                                <input type="text" className="form-control" id="amount" placeholder="Addresss" />
+                                <input type="text" className="form-control" id="amount" placeholder="Amount" />
                                 <small id="amount" className="form-text text-muted">HLC currency</small>
                             </div>
 
@@ -61,6 +62,8 @@ export default function Transfer() {
                     </div>
                 </div>
             </div>
+
+            <Transaction />
         </>
     )
 }

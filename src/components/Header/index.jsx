@@ -8,7 +8,7 @@ import FormatAmount from '../../utils/formatBalance'
 export default function Header() {
 
     const [address, setAddress] = useState("")
-    const [balance, setBalance] = useState("0")
+    const [balance, setBalance] = useState(false)
 
     const handleConnectWallet = async () => {
         const addressConnected = await connectWallet();
@@ -57,7 +57,15 @@ export default function Header() {
 
                     <div className="d-flex align-items-center">
                         <div className="btn btn-warning mr-1">
-                            { balance } HLC
+                            { 
+                                balance === false
+                                ?
+                                <>
+                                    <img className="loading-amount" src="./images/loading-amount.gif" alt="" />
+                                </>
+                                :
+                                `${balance} HLC`
+                            } 
                         </div>
                         <div className="button btn btn-primary"
                             onClick={() => handleConnectWallet()}
