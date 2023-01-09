@@ -2,22 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { connectWallet } from "../../utils/connectWallet"
 import truncateEthAddress from 'truncate-eth-address'
 import './Header.scss'
-import { getBalanceHLC } from '../../utils/interactionToken'
-import FormatAmount from '../../utils/formatBalance'
+import { updateHCL_Balance } from '../../utils/interactionToken'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function Header() {
 
     const [address, setAddress] = useState("")
-    const [balance, setBalance] = useState(false)
+    // const [balance, setBalance] = useState()
+    const balance = useSelector(state => state.hlcBalance)
+    const dispatch = useDispatch()
 
     const handleConnectWallet = async () => {
         const addressConnected = await connectWallet();
         await setAddress(addressConnected);
-    }
-
-    const handleGetBalance = async () => {
-        const balance = await getBalanceHLC()
-        await setBalance(balance)
     }
 
     // handle changed wallet
@@ -43,8 +40,8 @@ export default function Header() {
     });
 
     // handle get balance
-    useEffect(() => {
-        handleGetBalance()
+    useEffect(() =>  {
+        updateHCL_Balance(dispatch)
     },[address])
 
     return (
@@ -72,6 +69,10 @@ export default function Header() {
                         >
                             { address === "" ? "Connect Wallet" : `${truncateEthAddress(address)}`}
                         </div>
+{/* 
+                        <div className="btn btn-primary ml-1" onClick={() => updateHCL_Balance(dispatch)}>
+                            update balance hereeee
+                        </div> */}
                     </div>
                 </div>
             </div>

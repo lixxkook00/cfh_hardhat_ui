@@ -1,16 +1,19 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { activeLoading } from '../../actions';
+import { activeLoading, updateHlcBalance } from '../../actions';
 import Transaction from '../../components/Transaction';
 import TransactionModal from '../../modals/TransactionModal';
-import { transfer } from '../../utils/interactionToken';
+import { transfer, updateHCL_Balance } from '../../utils/interactionToken';
+import CurrencyInput from '../../components/CurrencyInput';
 
 export default function Transfer() {
 
     const [showModal, setShowModal] = useState(false);
     const [txHash, setTxHash] = useState("")
+
     const handleCloseModal = () => {
         setShowModal(false);
+        forTransfer.current[0].value = ""
         forTransfer.current[1].value = ""
     }
     const handleShowModal = () => setShowModal(true);
@@ -22,6 +25,7 @@ export default function Transfer() {
     const handleTransfer = async (e) => {
         e.preventDefault();
         dispatch(activeLoading())
+
         const data = {
             addressTo : e.target[0].value,
             amount : e.target[1].value
@@ -48,10 +52,10 @@ export default function Transfer() {
                                 <label htmlFor="addressTo">Address Receiver</label>
                                 <input type="text" className="form-control" id="addressTo" placeholder="Addresss" />
                             </div>
-                            
+
                             <div className="form-group">
                                 <label htmlFor="amount">Amount</label>
-                                <input type="text" className="form-control" id="amount" placeholder="Amount" />
+                                <CurrencyInput typeInput="text" classInput="form-control" idInput="amount" placeholderInput="Amount" />
                                 <small id="amount" className="form-text text-muted">HLC currency</small>
                             </div>
 

@@ -11,3 +11,12 @@ export const removeLoading = () => {
         payload: false,
     }
 }
+
+export const updateHlcBalance = (balance) => {
+    return {
+        type: 'UPDATE',
+        payload: {
+            balance : balance
+        },
+    }
+}
