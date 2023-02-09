@@ -8,8 +8,8 @@ export default function TransactionModal({txHash,showModal,handleCloseModal}) {
     const dispatch = useDispatch()
         
     const closeModal = async () => {
-        // await updateHCL_Balance(dispatch)
-        handleCloseModal()
+        await updateHCL_Balance(dispatch)
+        await handleCloseModal()
     }
     
     return (

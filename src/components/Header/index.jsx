@@ -69,8 +69,8 @@ export default function Header() {
                         >
                             { address === "" ? "Connect Wallet" : `${truncateEthAddress(address)}`}
                         </div>
-{/* 
-                        <div className="btn btn-primary ml-1" onClick={() => updateHCL_Balance(dispatch)}>
+                        
+                        {/* <div className="btn btn-primary ml-1" onClick={() => updateHCL_Balance(dispatch)}>
                             update balance hereeee
                         </div> */}
                     </div>

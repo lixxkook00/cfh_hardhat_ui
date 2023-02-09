@@ -5,15 +5,11 @@ export default function CurrencyInput({typeInput,classInput,idInput,placeholderI
   const valueRef = useRef();
   const [value,setValue] = useState("");
   const [focus, setFocus] = useState(false);
-    
-  useEffect(() => {
-    console.log("value",getCorrectCurrencyInput(value), typeof value)
-  },[value])
 
   const formatCurrency = (newValue) => {
     const [formattedWholeValue, decimalValue = "0"] = newValue.split(".");
     const signifantValue = formattedWholeValue.replace(/,/g, "");
-
+    
     const floatValue = parseFloat(
         signifantValue + "." + decimalValue.slice(0, 2)
     );
@@ -39,11 +35,12 @@ export default function CurrencyInput({typeInput,classInput,idInput,placeholderI
         className={classInput}
         id={idInput}
         placeholder={placeholderInput}
-
-        pattern="d+(.d{2})?"
         value={value}
-        onChange={(e) => setValue(formatCurrency(e.target.value))}
         ref={valueRef}
+        
+        // pattern="d+(.d{2})?"
+
+        onChange={(e) => setValue(formatCurrency(e.target.value))}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
     />

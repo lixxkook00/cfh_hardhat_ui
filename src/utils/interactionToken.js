@@ -19,7 +19,6 @@ export async function getBalanceHLC() {
     if(window.ethereum.selectedAddress){
         const balanceBN = await contract.methods.balanceOf(window.ethereum.selectedAddress).call()
         const finalBalance = await FormatAmount(balanceBN.toString(),18)
-
         return finalBalance
     }
 
@@ -28,7 +27,7 @@ export async function getBalanceHLC() {
 
 export async function updateHCL_Balance (dispatch) {
     const balance = await getBalanceHLC();
-    console.log("balance in updateHCL_Balance",balance)
+    // console.log("balance in updateHCL_Balance",balance)
     await dispatch(updateHlcBalance(balance))
 }
 
@@ -41,7 +40,7 @@ export async function transfer(addressTo, amount, dispatch, setTxHash) {
 
         const data = await contract.methods['transfer'](
             addressTo, 
-            web3.utils.toWei(amount.toString(), 'ether')
+            web3.utils.toWei(amount.replace(/,/g, "").toString(), 'ether')
         ).encodeABI();
         
         const transactionParameters = {

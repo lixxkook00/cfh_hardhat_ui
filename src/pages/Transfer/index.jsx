@@ -30,6 +30,7 @@ export default function Transfer() {
             addressTo : e.target[0].value,
             amount : e.target[1].value
         }
+
         await transfer(data.addressTo, data.amount, dispatch, setTxHash);
 
         await setShowModal(true);
