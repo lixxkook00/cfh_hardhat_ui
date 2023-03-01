@@ -18,7 +18,7 @@ export default function TransactionModal({txHash,showModal,handleCloseModal}) {
                 <Modal.Title>View your transaction</Modal.Title>
             </Modal.Header>
 
-            <a href={`https://testnet.bscscan.com/tx/${txHash}`} target="_blank">
+            <a href={`https://testnet.bscscan.com/tx/${txHash}`} target="_blank" rel="noreferrer" >
                 {txHash}
             </a>
 

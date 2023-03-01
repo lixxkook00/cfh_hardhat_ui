@@ -5,11 +5,13 @@ import Transaction from '../../components/Transaction';
 import TransactionModal from '../../modals/TransactionModal';
 import { transfer, updateHCL_Balance } from '../../utils/interactionToken';
 import CurrencyInput from '../../components/CurrencyInput';
+import { getNameWithWallet } from '../../api/user';
 
 export default function Transfer() {
 
     const [showModal, setShowModal] = useState(false);
     const [txHash, setTxHash] = useState("")
+    const [nameReceiver,setNameReceiver] = useState("")
 
     const handleCloseModal = () => {
         setShowModal(false);
@@ -28,12 +30,19 @@ export default function Transfer() {
 
         const data = {
             addressTo : e.target[0].value,
-            amount : e.target[1].value
+            amount : e.target[2].value
         }
 
         await transfer(data.addressTo, data.amount, dispatch, setTxHash);
 
         await setShowModal(true);
+    }
+
+    const handleGetNameOfReceiver = async (e) => {
+        if(e.target.value.length===42){
+            const nameReceiver = await getNameWithWallet(e.target.value)
+            await nameReceiver!==undefined ? setNameReceiver(nameReceiver) : setNameReceiver("Unknown")
+        }
     }
 
     return (
@@ -51,7 +60,12 @@ export default function Transfer() {
                         <form onSubmit={(e) => handleTransfer(e)} ref={forTransfer}>
                             <div className="form-group">
                                 <label htmlFor="addressTo">Address Receiver</label>
-                                <input type="text" className="form-control" id="addressTo" placeholder="Addresss" />
+                                <input type="text" className="form-control" id="addressTo" placeholder="Addresss" onBlur={(e) => handleGetNameOfReceiver(e)}/>
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="nameReceiver">Name of Receiver</label>
+                                <input value={nameReceiver} disabled={true} type="text" className="form-control" id="nameReceiver" placeholder="Name Of Receiver" />
                             </div>
 
                             <div className="form-group">

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { connectWallet } from "../../utils/connectWallet"
 import truncateEthAddress from 'truncate-eth-address'
-import './Header.scss'
 import { updateHCL_Balance } from '../../utils/interactionToken'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+
+import './Header.scss'
 
 export default function Header() {
 
@@ -13,7 +15,7 @@ export default function Header() {
     const dispatch = useDispatch()
 
     const handleConnectWallet = async () => {
-        const addressConnected = await connectWallet();
+        const addressConnected = await connectWallet(dispatch);
         await setAddress(addressConnected);
     }
 
@@ -48,8 +50,14 @@ export default function Header() {
         <div className="header">
             <div className="container">
                 <div className="header-wrapper d-flex justify-content-between align-items-center">
-                    <div className="header-logo">
+                    <Link to="/" className="header-logo">
                         <img className="img-fluid" src="./images/logo.png" alt="" />
+                    </Link>
+
+                    <div className="nav">
+                        <Link to="/transfer" className="nav-item button btn btn-primary text-white">
+                            Transfer
+                        </Link>
                     </div>
 
                     <div className="d-flex align-items-center">
@@ -65,7 +73,7 @@ export default function Header() {
                             } 
                         </div>
                         <div className="button btn btn-primary"
-                            onClick={() => handleConnectWallet()}
+                            // onClick={() => handleConnectWallet()}
                         >
                             { address === "" ? "Connect Wallet" : `${truncateEthAddress(address)}`}
                         </div>

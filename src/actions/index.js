@@ -20,3 +20,19 @@ export const updateHlcBalance = (balance) => {
         },
     }
 }
+
+export const getUserInfor = () => {
+    return {
+        type: 'GET_INFOR',
+        payload: {},
+    }
+}
+
+export const setUserInfor = (infor) => {
+    return {
+        type: 'SET_INFOR',
+        payload: {
+            ...infor
+        }
+    }
+}
