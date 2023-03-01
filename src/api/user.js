@@ -92,6 +92,7 @@ export async function register(e,setErrMessage,dispatch) {
     .catch(
         error => {
             if (error?.response) {
+                dispatch(removeLoading())
                 setErrMessage(error?.response.data.msg)
                 return error?.response;
             }
