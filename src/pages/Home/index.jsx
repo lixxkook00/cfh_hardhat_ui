@@ -16,7 +16,9 @@ export default function Home() {
                         ?
                         <div className='mt-5'>Welcome back <b >{userInfor.full_name}</b></div>
                         :
-                        <Link to='/register'> You are new member register now !!!</Link>
+                        <div className="centering h-100">
+                            <Link to='/register' className='gradient-box'> You are new member register now !!!</Link>
+                        </div>
                     }
                 </div>
             </div>

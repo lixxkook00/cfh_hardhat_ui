@@ -3,11 +3,13 @@ import { connectWallet } from "../../utils/connectWallet"
 import truncateEthAddress from 'truncate-eth-address'
 import { updateHCL_Balance } from '../../utils/interactionToken'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import './Header.scss'
 
 export default function Header() {
+
+    const navigate = useNavigate()
 
     const [address, setAddress] = useState("")
     // const [balance, setBalance] = useState()
@@ -15,7 +17,7 @@ export default function Header() {
     const dispatch = useDispatch()
 
     const handleConnectWallet = async () => {
-        const addressConnected = await connectWallet(dispatch);
+        const addressConnected = await connectWallet(dispatch,navigate);
         await setAddress(addressConnected);
     }
 
@@ -55,24 +57,29 @@ export default function Header() {
                     </Link>
 
                     <div className="nav">
-                        <Link to="/transfer" className="nav-item button btn btn-primary text-white">
+                        <Link to="/" className="nav-item gradient-text">
+                            Home
+                        </Link>
+                        <Link to="/transfer" className="nav-item gradient-text">
                             Transfer
                         </Link>
                     </div>
 
                     <div className="d-flex align-items-center">
-                        <div className="btn btn-warning mr-1">
-                            { 
-                                balance === false
-                                ?
-                                <>
-                                    <img className="loading-amount" src="./images/loading-amount.gif" alt="" />
-                                </>
-                                :
-                                `${balance} HLC`
-                            } 
+                        <div className="gradient-box mr-1">
+                            <div className="gradient-text gold">
+                                { 
+                                    balance === false
+                                    ?
+                                    <>
+                                        <img className="loading-amount" src="./images/loading-amount.gif" alt="" />
+                                    </>
+                                    :
+                                    `${balance} HLC`
+                                } 
+                            </div>
                         </div>
-                        <div className="button btn btn-primary"
+                        <div className="gradient-box centering"
                             // onClick={() => handleConnectWallet()}
                         >
                             { address === "" ? "Connect Wallet" : `${truncateEthAddress(address)}`}

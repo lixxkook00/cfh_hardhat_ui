@@ -2,3 +2,85 @@
     height: 25px;
     width: auto;
 }
+
+.gradient-box {
+    align-items: center;
+    background: #000032b8;
+    background-clip: padding-box;
+    border: 3px solid transparent;
+    border-radius: 16px;
+    box-sizing: border-box;
+    color: #fff;
+    display: flex;
+    margin: auto;
+    position: relative;
+
+    padding: 10px;
+
+    align-items: center;
+    display: flex;
+    font-weight: 700;
+    min-height: 40px;
+    justify-content: center;
+    transition: all .5s ease-in-out;
+    
+    &:hover{
+        text-decoration: none;
+        color: #fff;
+    }
+}
+
+.gradient-box:before {
+    background: linear-gradient(90deg,#d085c3,#5e80fc);
+    border-radius: inherit;
+    bottom: 0;
+    content: "";
+    left: 0;
+    margin: -3px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+}
+
+.gradient-box:after {
+    -webkit-animation: glowing-button 1s infinite alternate;
+    animation: glowing-button 1s infinite alternate;
+    background: linear-gradient(90deg,#d085c3,#8d8bf8,#5e80fc);
+    border-radius: 16px;
+    content: "";
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+    height: 103%;
+    position: absolute;
+    transition: all .5s ease-in-out;
+    width: 103%;
+    z-index: -1;
+}
+
+.gradient-text {
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    font-weight: 700;
+    text-transform: uppercase;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: linear-gradient(90deg,#d085c3,#8d8bf8,#5e80fc);
+}
+
+.gradient-text.bronze{
+    background-image: linear-gradient(90deg,#FFE59A 10%,#F58E2D 90%);
+}
+
+.gradient-text.silver{
+    background-image: linear-gradient(90deg,#D2E9E4 10%,#87AFBC 90%);
+}
+
+.gradient-text.gold{
+    background-image: linear-gradient(90deg,#FFF57D 10%,#FFBD39 90%);
+}
+
+.gradient-text.platinum{
+    background-image: linear-gradient(90deg,#F6C2FC 10%,#B571BB 90%);
+}

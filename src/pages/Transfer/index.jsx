@@ -39,9 +39,11 @@ export default function Transfer() {
     }
 
     const handleGetNameOfReceiver = async (e) => {
-        if(e.target.value.length===42){
+        if(e.target.value.length===42 && e.target.value != window.ethereum.selectedAddress){
             const nameReceiver = await getNameWithWallet(e.target.value)
             await nameReceiver!==undefined ? setNameReceiver(nameReceiver) : setNameReceiver("Unknown")
+        }else if(e.target.value === window.ethereum.selectedAddress){
+            setNameReceiver("You can't send coins to yourself")
         }
     }
 
